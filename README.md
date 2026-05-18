@@ -1,1 +1,0 @@
-# cryptograf_app

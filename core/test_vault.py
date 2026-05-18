@@ -4,9 +4,9 @@ import tempfile
 
 sys.path.insert(0, os.path.dirname(__file__))
 
-from get_device_id import get_device_id
-from crypto import encrypt_file, decrypt_file
-from sharekey import encrypt_for_sharing, decrypt_with_sharekey
+from core.get_device_id import get_device_id
+from core.crypto import encrypt_file, decrypt_file
+from core.sharekey import encrypt_for_sharing, decrypt_with_sharekey
 
 GREEN = "\033[92m"
 RED = "\033[91m"
