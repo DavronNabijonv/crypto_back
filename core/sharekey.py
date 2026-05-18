@@ -1,9 +1,9 @@
 import os
 import json
 import struct
-import mimetypes
-import time
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+
+from core.utils import _make_meta
 
 # .vaultx share-mode layout:
 #   [8B magic] [1B version] [12B nonce] [4B blob_len] [blob]
@@ -13,18 +13,6 @@ from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 MAGIC = b"VAULTXSH"
 VERSION = 0x02
 NONCE_LEN = 12
-
-
-def _make_meta(input_path: str) -> bytes:
-    filename = os.path.basename(input_path)
-    mime, _ = mimetypes.guess_type(filename)
-    meta = {
-        "filename": filename,
-        "filetype": mime or "application/octet-stream",
-        "timestamp": time.time(),
-        "version": VERSION,
-    }
-    return json.dumps(meta, separators=(",", ":")).encode()
 
 
 def encrypt_for_sharing(input_path: str, output_path: str) -> str:

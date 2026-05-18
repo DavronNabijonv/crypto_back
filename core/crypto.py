@@ -1,11 +1,10 @@
 import os
 import json
 import struct
-import mimetypes
-import time
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+from core.utils import _make_meta
 
 # .vaultx v2 layout (device-locked):
 #   [8B magic] [1B version] [16B salt] [12B nonce] [4B blob_len] [blob]
@@ -26,18 +25,6 @@ def derive_key(device_id: str, salt: bytes) -> bytes:
         iterations=PBKDF2_ITERATIONS,
     )
     return kdf.derive(device_id.encode())
-
-
-def _make_meta(input_path: str) -> bytes:
-    filename = os.path.basename(input_path)
-    mime, _ = mimetypes.guess_type(filename)
-    meta = {
-        "filename": filename,
-        "filetype": mime or "application/octet-stream",
-        "timestamp": time.time(),
-        "version": VERSION,
-    }
-    return json.dumps(meta, separators=(",", ":")).encode()
 
 
 def encrypt_file(input_path: str, output_path: str, device_id: str) -> None:
