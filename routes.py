@@ -48,7 +48,7 @@ async def encrypt(
 
 
 # ---------------------------------------------------------------------------
-# POST /decrypt
+# POST  /decrypt
 #   Client sends: a .vaultx file + the key (device_id OR share_key_hex)
 #   Server:       reads magic bytes to detect file type, decrypts, returns file
 #   Server keeps: nothing — key is used in memory then discarded
