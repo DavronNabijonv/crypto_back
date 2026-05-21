@@ -2,3 +2,4 @@ cryptography
 fastapi
 uvicorn[standard]
 python-multipart
+slowapi
