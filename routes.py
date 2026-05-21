@@ -119,4 +119,6 @@ async def share(file: UploadFile = File(...)):
     )
 
 
-# check
+@router.get("/health")
+async def health():
+    return {"status": "ok"}

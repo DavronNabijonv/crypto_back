@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: vaultx-backend
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free                  # change to "starter" or "standard" for paid tiers
+    healthCheckPath: /health
+    envVars:
+      - key: WORKERS
+        value: "1"              # free tier has 512 MB RAM — 1 worker is safe
